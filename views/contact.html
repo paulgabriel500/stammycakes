@@ -4,11 +4,136 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contact - Stammy Cakes</title>
-  <link rel="stylesheet" href="/public/css/styles.css">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #2C2C2C;
+      color: #FFD700;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 50px auto;
+      background-color: #3A3A3A;
+      padding: 25px;
+      border-radius: 8px;
+      box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.2);
+    }
+
+    h1 {
+      color: #FFA500;
+    }
+
+    p {
+      font-size: 1.1em;
+    }
+
+    .contact-info {
+      margin-bottom: 20px;
+    }
+
+    .map {
+      margin-top: 20px;
+    }
+
+    iframe {
+      width: 100%;
+      height: 300px;
+      border-radius: 8px;
+    }
+
+    form {
+      margin-top: 20px;
+      text-align: left;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin: 5px 0;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: none;
+      border-radius: 5px;
+    }
+
+    button {
+      width: 100%;
+      background-color: #FFA500;
+      color: #fff;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      font-size: 1.1em;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background-color: #FF8C00;
+    }
+
+    .home-button {
+      background-color: #FFD700;
+      color: #2C2C2C;
+      font-weight: bold;
+      text-decoration: none;
+      display: inline-block;
+      padding: 12px 20px;
+      margin-top: 20px;
+      border-radius: 5px;
+    }
+
+    .home-button:hover {
+      background-color: #FFC107;
+    }
+
+  </style>
 </head>
 <body>
-  <h1>Contact Us</h1>
-  <p>Phone: +254 796892001</p>
-  <p>Email: info@stammycakes.com</p>
+
+  <div class="container">
+    <h1>Contact Us</h1>
+    <div class="contact-info">
+      <p><strong>📍 Location:</strong> Bungoma Town, Alongside Kanduyi Mumias Road, Immediately after Khetia Highway</p>
+      <p><strong>📞 Phone:</strong> +254 796 892 001</p>
+      <p><strong>📧 Email:</strong> <a href="mailto:info@stammycakes.com" style="color: #FFD700; text-decoration: none;">info@stammycakes.com</a></p>
+    </div>
+
+    <h2>📍 Find Us on Google Maps</h2>
+    <div class="map">
+      <iframe 
+        src="https://maps.google.com/maps?q=Bungoma%20Town,%20Kenya&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+        frameborder="0" 
+        scrolling="no" 
+        allowfullscreen>
+      </iframe>
+    </div>
+
+    <h2>📩 Send Us a Message</h2>
+    <form action="/send-message" method="POST">
+      <label for="name">Your Name:</label>
+      <input type="text" id="name" name="name" required>
+
+      <label for="email">Your Email:</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="message">Your Message:</label>
+      <textarea id="message" name="message" rows="4" required></textarea>
+
+      <button type="submit">Send Message</button>
+    </form>
+
+    <!-- Back to Home Button -->
+    <a href="/" class="home-button">⬅ Back to Home</a>
+  </div>
+
 </body>
 </html>

@@ -4,18 +4,175 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login - Stammy Cakes</title>
-  <link rel="stylesheet" href="/public/css/styles.css">
+  <style>
+    /* General Styles */
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #2C2C2C;
+      color: #FFD700;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background-color: #3A3A3A;
+      padding: 25px;
+      border-radius: 8px;
+      box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.2);
+      text-align: center;
+      width: 90%;
+      max-width: 400px;
+    }
+
+    h1 {
+      color: #FFA500;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      border: none;
+      border-radius: 5px;
+      background-color: #2C2C2C;
+      color: #FFD700;
+      font-size: 1em;
+    }
+
+    input::placeholder {
+      color: #FFA500;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 15px;
+      background-color: #FF4500;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 1.1em;
+      cursor: pointer;
+      transition: 0.3s ease-in-out;
+    }
+
+    button:hover {
+      background-color: #FF6347;
+    }
+
+    .error-message {
+      display: none;
+      color: #FF6347;
+      font-weight: bold;
+      margin-top: 15px;
+    }
+
+    .link {
+      display: block;
+      margin-top: 15px;
+      color: #00FFFF;
+      text-decoration: none;
+    }
+
+    .link:hover {
+      text-decoration: underline;
+    }
+
+    .home-button {
+      background-color: #FFD700;
+      color: #2C2C2C;
+      font-weight: bold;
+      text-decoration: none;
+      display: inline-block;
+      padding: 12px 20px;
+      margin-top: 20px;
+      border-radius: 5px;
+      transition: 0.3s;
+    }
+
+    .home-button:hover {
+      background-color: #FFC107;
+    }
+
+  </style>
 </head>
 <body>
-  <h1>Login</h1>
-  <form action="/login" method="POST">
-    <label for="username">Username:</label>
-    <input type="text" id="username" name="username" required>
-    <br>
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" required>
-    <br>
-    <button type="submit">Login</button>
-  </form>
+
+  <div class="container">
+    <h1 id="form-title">Login</h1>
+    <form id="auth-form">
+      <input type="text" id="username" placeholder="Enter your username" required>
+      <input type="password" id="password" placeholder="Enter your password" required>
+      <button type="submit">Login</button>
+      <p class="error-message" id="error-message">Invalid username or password.</p>
+    </form>
+    <a href="#" class="link" id="toggle-form">Don't have an account? Register</a>
+  </div>
+
+  <!-- Back to Home Button -->
+  <a href="/" class="home-button">⬅ Back to Home</a>
+
+  <script>
+    const formTitle = document.getElementById("form-title");
+    const authForm = document.getElementById("auth-form");
+    const toggleForm = document.getElementById("toggle-form");
+    const errorMessage = document.getElementById("error-message");
+
+    let isLogin = true;
+
+    toggleForm.addEventListener("click", function() {
+      isLogin = !isLogin;
+      if (isLogin) {
+        formTitle.textContent = "Login";
+        toggleForm.textContent = "Don't have an account? Register";
+        authForm.innerHTML = `
+          <input type="text" id="username" placeholder="Enter your username" required>
+          <input type="password" id="password" placeholder="Enter your password" required>
+          <button type="submit">Login</button>
+          <p class="error-message" id="error-message">Invalid username or password.</p>
+        `;
+      } else {
+        formTitle.textContent = "Register";
+        toggleForm.textContent = "Already have an account? Login";
+        authForm.innerHTML = `
+          <input type="text" id="username" placeholder="Choose a username" required>
+          <input type="password" id="password" placeholder="Create a password" required>
+          <button type="submit">Register</button>
+        `;
+      }
+    });
+
+    authForm.addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+
+      if (isLogin) {
+        // Login process
+        const storedUser = localStorage.getItem(username);
+        if (storedUser && storedUser === password) {
+          alert("Login Successful! Redirecting...");
+          window.location.href = "/menu.html"; // Redirect to menu
+        } else {
+          document.getElementById("error-message").style.display = "block";
+        }
+      } else {
+        // Registration process
+        if (localStorage.getItem(username)) {
+          alert("Username already exists! Try another one.");
+        } else {
+          localStorage.setItem(username, password);
+          alert("Registration Successful! You can now log in.");
+          toggleForm.click(); // Switch to login form
+        }
+      }
+    });
+  </script>
+
 </body>
 </html>
