@@ -11,4 +11,4 @@ Welcome to Stammy Cakes! This is a website for ordering delicious cakes in Bungo
 ## How to Run
 1. Install dependencies:
    ```bash
-   npm install
+   npm install"# stammycakes" 
