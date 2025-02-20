@@ -1,1 +1,1 @@
-alert("Welcome to Stammy Cakes!");
+alert("Stammy Cakes You home of Stweetness!");
